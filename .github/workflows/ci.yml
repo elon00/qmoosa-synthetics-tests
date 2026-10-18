@@ -1,0 +1,78 @@
+name: Full-Spectrum Synthetics Reality Gates & Invariant CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  reality-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tests repository
+        uses: actions/checkout@v4
+        with:
+          path: qmoosa-synthetics-tests
+
+      - name: Checkout protocol repository (Pinned Commit)
+        uses: actions/checkout@v4
+        with:
+          repository: elon00/qmoosa-synthetics-protocol
+          ref: 7178450bf8794cf67dd195194c142030d76048ed
+          path: qmoosa-synthetics-protocol
+
+      - name: Checkout engine repository (Pinned Commit)
+        uses: actions/checkout@v4
+        with:
+          repository: elon00/qmoosa-synthetics-engine
+          ref: d26e26a39d644667af79ef2073144e9e6fad5422
+          path: qmoosa-synthetics-engine
+
+      - name: Checkout sdk repository (Pinned Commit)
+        uses: actions/checkout@v4
+        with:
+          repository: elon00/qmoosa-synthetics-sdk
+          ref: eec2989de25a271ccd8b7d0489d3fb363f3d42ac
+          path: qmoosa-synthetics-sdk
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: qmoosa-synthetics-tests/package.json
+
+      - name: Install dependencies in sibling repositories
+        run: |
+          npm ci --prefix qmoosa-synthetics-protocol
+          npm ci --prefix qmoosa-synthetics-engine
+          npm ci --prefix qmoosa-synthetics-sdk
+
+      - name: Install dependencies in tests repository
+        working-directory: qmoosa-synthetics-tests
+        run: npm install
+
+      - name: Run Source & Package Integrity Gate (Archive Mode)
+        working-directory: qmoosa-synthetics-tests
+        run: npm run verify:archive
+
+      - name: Run Strict Current-HEAD Alignment Gate
+        working-directory: qmoosa-synthetics-tests
+        run: npm run verify:current-head
+
+      - name: Run Hermetic Source Derivation & Canonical Artifact Comparison Gate
+        working-directory: qmoosa-synthetics-tests
+        run: npm run verify:source
+
+      - name: Run Integration Tests
+        working-directory: qmoosa-synthetics-tests
+        run: npm run test:integration
+
+      - name: Run Adversarial Negative Control Suite
+        working-directory: qmoosa-synthetics-tests
+        run: npm run test:negative
+
+      - name: Static Lint Check
+        working-directory: qmoosa-synthetics-tests
+        run: npm run lint
