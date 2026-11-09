@@ -1,53 +1,5 @@
 {
-  "engine": "REA_Reverse_Engineer_Anything",
-  "status": "STRUCTURE_RECONSTRUCTED",
-  "analyzed_files": 15,
-  "manifest": {
-    "integrity-manifest.json": {
-      "bytes": 1190
-    },
-    "package-lock.json": {
-      "bytes": 1442
-    },
-    "package.json": {
-      "bytes": 1358
-    },
-    "README.md": {
-      "bytes": 1232
-    },
-    "packages\\qmoosa-synthetics-engine-1.0.0.tgz": {
-      "bytes": 27695
-    },
-    "packages\\qmoosa-synthetics-protocol-1.0.0.tgz": {
-      "bytes": 344023
-    },
-    "packages\\qmoosa-synthetics-sdk-1.0.0.tgz": {
-      "bytes": 5621
-    },
-    "scripts\\rea_inspector.py": {
-      "bytes": 1485
-    },
-    "scripts\\rsi_engine.py": {
-      "bytes": 2039
-    },
-    "scripts\\verify-source-integrity.mjs": {
-      "bytes": 8631
-    },
-    "tests\\integration.test.mjs": {
-      "bytes": 5332
-    },
-    "tests\\negative-control.test.mjs": {
-      "bytes": 5596
-    },
-    "tests\\reality_check_harness.py": {
-      "bytes": 1250
-    },
-    ".github\\workflows\\ci.yml": {
-      "bytes": 2573
-    },
-    ".github\\workflows\\qmoosa-rsi-rea-sync.yml": {
-      "bytes": 531
-    }
-  },
-  "timestamp": 1794026583
+  "engine": "REA_Inspector",
+  "timestamp": 1794247275,
+  "total_files": 18
 }
