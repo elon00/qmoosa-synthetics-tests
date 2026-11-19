@@ -11,26 +11,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout tests repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           path: qmoosa-synthetics-tests
 
       - name: Checkout protocol repository (Pinned Commit)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: elon00/qmoosa-synthetics-protocol
           ref: 7178450bf8794cf67dd195194c142030d76048ed
           path: qmoosa-synthetics-protocol
 
       - name: Checkout engine repository (Pinned Commit)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: elon00/qmoosa-synthetics-engine
           ref: d26e26a39d644667af79ef2073144e9e6fad5422
           path: qmoosa-synthetics-engine
 
       - name: Checkout sdk repository (Pinned Commit)
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           repository: elon00/qmoosa-synthetics-sdk
           ref: eec2989de25a271ccd8b7d0489d3fb363f3d42ac
